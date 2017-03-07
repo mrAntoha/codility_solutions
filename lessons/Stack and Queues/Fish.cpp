@@ -11,37 +11,26 @@ int solution(vector<int> &A, vector<int> &B) {
     
     for (size_t i = 0; i < B.size(); i++)
     {
-        while (true)
+        if (B[i] == 0)
         {
-            if (B[i] == 0)
+            while (!survivedFishes.empty() && B[survivedFishes.top()] == 1)
             {
-                if (survivedFishes.empty())
-                {
-                    survivedFishes.push(i);
-                    break;
-                }
-                
                 int topIdx = survivedFishes.top();
-                
-                if (B[topIdx] == 1)
-                {
-                    if (A[i] > A[topIdx])
-                        survivedFishes.pop();
-                    else
-                        break;
-                }
+
+                if (A[i] > A[topIdx])
+                    survivedFishes.pop();
                 else
-                {
-                    survivedFishes.push(i);
                     break;
-                }
             }
-            else
-            if (B[i] == 1)
+            
+            if (survivedFishes.empty() || B[survivedFishes.top()] == 0)
             {
                 survivedFishes.push(i);
-                break;
             }
+        }
+        else // B[i] == 1
+        {
+            survivedFishes.push(i);
         }
     }
     
