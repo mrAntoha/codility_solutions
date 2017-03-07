@@ -7,7 +7,7 @@ https://codility.com/demo/results/trainingQ33NNF-BGB/
 int solution(vector<int> &A, vector<int> &B) {
     // write your code in C++14 (g++ 6.2.0)
     
-    stack<int> fishes;
+    stack<int> survivedFishes;
     
     for (size_t i = 0; i < B.size(); i++)
     {
@@ -15,35 +15,35 @@ int solution(vector<int> &A, vector<int> &B) {
         {
             if (B[i] == 0)
             {
-                if (fishes.empty())
+                if (survivedFishes.empty())
                 {
-                    fishes.push(i);
+                    survivedFishes.push(i);
                     break;
                 }
                 
-                int topIdx = fishes.top();
+                int topIdx = survivedFishes.top();
                 
                 if (B[topIdx] == 1)
                 {
                     if (A[i] > A[topIdx])
-                        fishes.pop();
+                        survivedFishes.pop();
                     else
                         break;
                 }
                 else
                 {
-                    fishes.push(i);
+                    survivedFishes.push(i);
                     break;
                 }
             }
             else
             if (B[i] == 1)
             {
-                fishes.push(i);
+                survivedFishes.push(i);
                 break;
             }
         }
     }
     
-    return fishes.size();
+    return survivedFishes.size();
 }
